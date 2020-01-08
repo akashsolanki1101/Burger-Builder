@@ -1,0 +1,10 @@
+.Toolbar{
+    padding : 10px 10px;
+    background-color: rgb(100, 52, 7);
+    justify-content: space-between;
+    display : flex;
+    flex-flow: row;
+    color: white;
+    font-weight: bold;
+    box-sizing: border-box;
+}
