@@ -1,14 +1,14 @@
 import React from 'react'
-// import classes from './Layout.module.css'
+
 import Aux from '../hoc/Auxiliary'
 import Toolbar from '../Components/Navigation/Toolbar/Toolbar'
-import Burger from '../Components/Burger/BurgerBuilder'
+import BurgerBuilder from '../Container/BurgerBuilder/BurgerBuilder'
+// import classes from './Layout.module.css'
 
 const layout = ()=>(
-    <Aux >
+    <Aux>
         <Toolbar />
-        <Burger />        
-        <div>Burger Contents</div>
+        <BurgerBuilder />
     </Aux> 
 )
 

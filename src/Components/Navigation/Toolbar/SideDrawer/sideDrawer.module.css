@@ -1,0 +1,6 @@
+.SideDrawer{
+    height : 100%;
+    width : 200px;
+    background : white;
+    z-index : 1000; 
+}

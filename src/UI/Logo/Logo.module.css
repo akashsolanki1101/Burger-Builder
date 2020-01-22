@@ -1,11 +1,12 @@
 .Logo{
+    height : 35px;
+    width : 50px;
     padding : 2px;
     align-items: center;
     display : flex;
     justify-content: center;
-    width : 50px;
+    /* width : 50px; */
     box-sizing: border-box;
     border-radius: 6px;
     background : white;
-    height : 35px;
 }

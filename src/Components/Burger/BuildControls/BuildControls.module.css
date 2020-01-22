@@ -1,0 +1,7 @@
+.BuildControls{
+    display : flex;
+    flex-flow: column;
+    background-color :  rgba(214, 141, 5, 0.849);
+    width : 100%;
+    margin-top : 30px;
+}
