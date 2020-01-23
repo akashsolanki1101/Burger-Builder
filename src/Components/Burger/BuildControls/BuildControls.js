@@ -13,8 +13,15 @@ const controls =[
 const buildControls = (props)=>{
     return(
         <div className={classes.BuildControls}>
+            <h4 style={{textAlign:"center"}}>Current Price : ${props.price}</h4>
             {
-                controls.map(ctrl=><BuildControl key={ctrl.label} label={ctrl.label} />)
+                controls.map(ctrl=>
+                    <BuildControl
+                        count = {props.ingredients[ctrl.type]}
+                        key={ctrl.label} 
+                        label={ctrl.label} 
+                        addIngredient={()=>props.addIngredient(ctrl.type)}
+                        removeIngredient={()=>props.removeIngredient(ctrl.type)}/>)
             }
         </div>
 )}

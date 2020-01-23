@@ -3,5 +3,17 @@
     flex-flow: column;
     background-color :  rgba(214, 141, 5, 0.849);
     width : 100%;
-    margin-top : 30px;
+    margin-top : 0px;
+}
+
+@media(max-width : 360px){
+    .BuildControls{
+        margin-top: 60px;
+    }
+}
+
+@media(max-width : 320px){
+    .BuildControls{
+        margin-top: 0px;
+    }
 }
