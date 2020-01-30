@@ -1,10 +1,27 @@
-import React from 'react'
-import classes from './sideDrawer.module.css'
+import React from "react";
 
-const sideDrawer = (props)=>{
-    return <div 
-    className={classes.sideDrawer}
-    onClick={props.clicked}>{props.children}</div>
-}
+import classes from "./sideDrawer.module.css";
+import Aux from '../../../../hoc/Auxiliary'
+import NavigationItems from '../../Navigation Items/NavigationItems'
+
+const sideDrawer = props => {
+  let classees = [classes.SideDrawer];
+  
+  if (!props.sideDrawer) {
+    classees.push(classes.Close)
+  }
+
+  else{
+    classees.push(classes.Open);
+  }
+  
+  return (
+      <Aux>
+        <div className={classees.join(" ")}>{props.children}
+          <NavigationItems />
+        </div>
+      </Aux>
+    );
+};
 
 export default sideDrawer;

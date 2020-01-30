@@ -3,9 +3,13 @@
     width :500px;
     margin: auto;
     padding-top: 10px;
-    overflow: auto ;
     text-align: center;
     font-size: 150%;
+    /* display :flex; */
+    /* flex-flow: column; */
+    /* justify-content: center; */
+    overflow: auto ;
+    /* justify-content: space-betwee; */
   }
 
   

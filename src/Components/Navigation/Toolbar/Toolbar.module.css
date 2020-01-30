@@ -1,11 +1,23 @@
 .Toolbar{
-    /* height  : 7vh; */
-    padding : 8px 10px;
+    padding : 0 10px;
+    height : 40px;
     background-color: rgb(100, 52, 7);
-    justify-content: space-between;
     display : flex;
+    justify-content: space-between;
+    align-items: center;
     flex-flow: row;
     color: white;
     font-weight: bold;
     box-sizing: border-box;
+}
+
+.DesktopOnly{
+   display : flex; 
+}
+
+@media(max-width : 500px)
+{
+    .DesktopOnly{
+        display : none;
+    }
 }

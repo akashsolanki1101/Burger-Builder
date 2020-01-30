@@ -1,0 +1,55 @@
+.NavigationItem{
+    color : white;
+    box-sizing: border-box;
+    display :flex;
+    align-items: center;
+}
+
+.NavigationItem a{
+    color : white;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-bottom : 4px solid transparent;
+    padding : 8px 10px;
+    height: 100%;
+    display : block
+}
+
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a.active{
+    background-color: #8F5C2C;
+    border-bottom : 4px solid skyblue;
+    color : white;
+}
+
+@media(max-width : 499px)
+{
+    .NavigationItem{
+        box-sizing: border-box;
+        /* display :flex;
+        align-items: center; */
+        display :block;
+    }
+    
+    .NavigationItem a{
+        text-decoration: none;
+        box-sizing: border-box;
+        border-bottom : 4px solid transparent;
+        padding : 8px 10px;
+        height: 100%;
+        display : block;
+        color : Blue;
+        font-weight: bolder;     
+    }
+    
+    .NavigationItem a:hover,
+    .NavigationItem a:active,
+    .NavigationItem a.active{
+        background-color: grey;
+        color:skybLue;
+        border-bottom : none;
+        /* border-bottom : 4px solid skyblue; */
+        /* color : white */
+    }
+}

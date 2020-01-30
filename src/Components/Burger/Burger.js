@@ -3,7 +3,7 @@ import React from 'react'
 import BurgerIngredients from './BurgerIngredients/BurgerIngredients'
 import classes from './Burger.module.css'
 
-const burger=(props)=> {
+const burger = (props)=> {
         let ingredients = Object.keys(props.ingredients)
             .map((ingredient=> {
                     let a=[];
@@ -13,8 +13,17 @@ const burger=(props)=> {
                         }
                     return a;
         }));
-
-
+        let len = 0;
+        
+        ingredients.forEach(element =>{
+            len = len + element.length;
+        })  
+        
+        if(!len)
+        {
+            ingredients = (<div style={{fontWeight : "bolder"}}>Please start adding ingredients!!</div>)
+        }
+     
         return(
             <div className={classes.Burger}>
                <BurgerIngredients type="bread-top"/>
