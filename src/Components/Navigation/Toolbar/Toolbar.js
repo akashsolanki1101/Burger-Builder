@@ -5,6 +5,7 @@ import SideDrawer from './SideDrawer/sideDrawer'
 import Aux from '../../../hoc/Auxiliary'
 import Backdrop from '../../Backdrop/Backdrop'
 import NavigationItems from '../Navigation Items/NavigationItems'
+import Hamburger from '../../../UI/Hamburger/Hamburger'
 
 class Toolbar extends Component{
     state ={
@@ -26,11 +27,9 @@ class Toolbar extends Component{
                 <Backdrop cancel={this.hideSideDrawer}
                             show={this.state.sideDrawer}/>
                 <header className={classes.Toolbar}>
-                    <div onClick ={this.showSideDrawer}>MENU</div>
+                    <div style={{height : "100%"}} onClick={this.showSideDrawer} disabled><Hamburger/></div>
                     <Logo />
-                    
                     <div className={classes.DesktopOnly}><NavigationItems/></div>
-                    
                 </header>
             </Aux>
     )

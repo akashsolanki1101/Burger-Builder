@@ -12,7 +12,10 @@
     border-bottom : 4px solid transparent;
     padding : 8px 10px;
     height: 100%;
-    display : block
+    display : block;
+    font-size: 18px;
+    /* cursor : pointer; */
+
 }
 
 .NavigationItem a:hover,
@@ -21,6 +24,7 @@
     background-color: #8F5C2C;
     border-bottom : 4px solid skyblue;
     color : white;
+    cursor : pointer;
 }
 
 @media(max-width : 499px)
@@ -39,8 +43,11 @@
         padding : 8px 10px;
         height: 100%;
         display : block;
-        color : Blue;
-        font-weight: bolder;     
+        color : #8F5C2C;
+        ;
+        font-weight: bolder;   
+        /* cursor : pointer; */
+
     }
     
     .NavigationItem a:hover,
@@ -51,5 +58,6 @@
         border-bottom : none;
         /* border-bottom : 4px solid skyblue; */
         /* color : white */
+        cursor : pointer;
     }
 }
