@@ -15,9 +15,17 @@
    display : flex; 
 }
 
+.Hamburger{
+    display : none;
+}
+
 @media(max-width : 500px)
 {
     .DesktopOnly{
         display : none;
+    }
+
+    .Hamburger{
+        display: flex;
     }
 }

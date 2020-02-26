@@ -1,28 +1,22 @@
-import React from 'react'
-import classes from './Modal.module.css'
+import React from "react";
 
-const modal = (props)=>{
-    let classees = [classes.Modal];
-    if(!props.placeorder)
-    {
-        classees.push(classes.Display);
-    }
-    const content = Object.keys(props.ingredients)
-        .map(igkey=>{
-            return <li style={{textTransform:"capitalize",fontWeight : "600"}} key={igkey}>{igkey}-{props.ingredients[igkey]}</li>
-        })
-    return(
-        <div className={classees.join(' ')}>
-            <h2 style={{textAlign:"center"}}>Your order contains</h2>
-            <h4>A delicious burger with ingredients :</h4>
-            <ul>
-                {content}
-            </ul>
-            <h4>Price-${props.price}</h4>
-            <button className={[classes.Success,classes.Button].join(' ')}>Checkout</button>
-            <button className={[classes.Danger,classes.Button].join(' ')} onClick={props.cancelOrder}>Cancel</button>
-        </div>
-    )
-}
+import classes from "./Modal.module.css";
+import Backdrop from '../../Components/Backdrop/Backdrop'
+import Aux from "../../hoc/Auxiliary";
 
-export default modal
+const modal = props => {
+  let clases = [classes.Modal];
+
+  if (!props.show) {
+    clases.push(classes.Display);
+  }
+
+  return (
+    <Aux>
+      <div className={clases.join(" ")}>{props.children}</div>
+      <Backdrop show={props.show} cancel={props.cancel} />
+    </Aux>
+  )};
+
+
+export default modal;

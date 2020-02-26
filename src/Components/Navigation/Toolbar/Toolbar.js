@@ -9,7 +9,7 @@ import Hamburger from '../../../UI/Hamburger/Hamburger'
 
 class Toolbar extends Component{
     state ={
-        sideDrawer : false
+        sideDrawer : false,
     }
 
     showSideDrawer = ()=>{  
@@ -27,7 +27,7 @@ class Toolbar extends Component{
                 <Backdrop cancel={this.hideSideDrawer}
                             show={this.state.sideDrawer}/>
                 <header className={classes.Toolbar}>
-                    <div style={{height : "100%"}} onClick={this.showSideDrawer} disabled><Hamburger/></div>
+                    <div className = {classes.Hamburger} style={{height : "100%"}} onClick={this.showSideDrawer} disabled><Hamburger/></div>
                     <Logo />
                     <div className={classes.DesktopOnly}><NavigationItems/></div>
                 </header>
