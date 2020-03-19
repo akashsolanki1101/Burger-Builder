@@ -4,10 +4,10 @@ import classes from './OrderSummary.module.css'
 const orderSummary = (props)=>{
 
     let classees = [];
-    if(!props.show)
-    {
-        classees.push(".Display");
-    }
+    // if(!props.show)
+    // {
+    //     classees.push(".Display");
+    // }
 
     const content = Object.keys(props.ingredients)
         .map(igkey=>{

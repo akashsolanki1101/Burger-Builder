@@ -2,12 +2,11 @@ import React from 'react'
 
 import Aux from '../Auxiliary'
 import Toolbar from '../../Components/Navigation/Toolbar/Toolbar'
-import BurgerBuilder from '../../Container/BurgerBuilder/BurgerBuilder'
 
-const layout = ()=>(
+const layout = (props)=>(
     <Aux>
         <Toolbar />
-        <BurgerBuilder />
+        {props.children}
     </Aux> 
 )
 

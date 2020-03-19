@@ -4,7 +4,7 @@ import Burger from "../../Components/Burger/Burger";
 import BuildControls from "../../Components/Burger/BuildControls/BuildControls";
 import classes from "./BurgerBuilder.module.css";
 import Modal from "../../Components/Modal/Modal";
-import Backdrop from "../../Components/Backdrop/Backdrop";
+// import Backdrop from "../../Components/Backdrop/Backdrop";
 import axios from "../../axios-orders";
 import Spinner from "../../UI/Spinner/Spinner";
 import Aux from "../../hoc/Auxiliary";
@@ -18,9 +18,9 @@ class BurgerBuilder extends Component {
     orderReady: false,
     placeOrder: false,
     showSideDrawer: false,
-    ingredientsadded: false,
     orderplaced: true,
-    ingredientsLoaded: false
+    ingredientsLoaded: false,
+    checkout : false
   };
 
   ingredientsPrice = {
@@ -41,29 +41,27 @@ class BurgerBuilder extends Component {
       });
   }
 
-  purchaseControlHandler = () => {
-    this.setState({ orderplaced: false });
-    const order = {
-      ingredients: this.state.ingredients,
-      totalprice: this.state.totalPrice,
-      address: {
-        name: "max",
-        number: 123,
-        city: "local",
-        country: "India"
-      },
-      delivery_method: "fastest"
-    };
-    this.setState({ placeOrder: false });
-    axios
-      .post("/orders.json", order)
-      .then(response => {
-        this.setState({ orderplaced: true });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+  // purchaseControlHandler = () => {
+  //    };
+
+  readyToCheckout = ()=>{
+    // this.setState({ placeOrder: false });
+    // this.setState({checkout : true})
+
+    const queryParams = [];
+    for(let i in this.state.ingredients)
+    {
+      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+    }
+
+    queryParams.push('price=' + this.state.totalPrice)
+    const queryString = queryParams.join('&')
+
+    this.props.history.push({
+      pathname : '/checkout',
+      search : '?' + queryString
+    })
+  }
 
   placeOrder = () => {
     const updatedPlaceOrder = true;
@@ -74,6 +72,10 @@ class BurgerBuilder extends Component {
     const updatedPlaceOrder = false;
     this.setState({ placeOrder: updatedPlaceOrder });
   };
+
+  finaliseOrder = ()=>{
+    this.setState({checkout : false})
+  }
 
   addIngredient = type => {
     const oldCount = this.state.ingredients[type];
@@ -127,15 +129,17 @@ class BurgerBuilder extends Component {
 
   render() {
     let orderSummary = null;
-
-    orderSummary = (
-        <OrderSummary  show={this.state.placeOrder} 
+    if(!this.state.checkout)
+    {
+      orderSummary = (
+        <OrderSummary  show={this.state.checkout} 
                         ingredients = {this.state.ingredients}
                         cancelOrder = {this.cancelOrder}
-                        Checkout = {this.purchaseControlHandler}
+                        Checkout = {this.readyToCheckout}
                         price={this.state.totalPrice}
-    />)
-
+    />)  
+    }
+    
     let burger = <Spinner />;
     if (this.state.ingredientsLoaded) {
       burger = (
@@ -150,7 +154,7 @@ class BurgerBuilder extends Component {
             placeorder={this.placeOrder}
           />
           <Modal show={this.state.placeOrder} cancel={this.cancelOrder}>
-            {orderSummary}
+              {orderSummary}
           </Modal>
         </Aux>
       );
@@ -158,17 +162,7 @@ class BurgerBuilder extends Component {
 
     return (
       <div className={classes.BurgerBuilder}>
-        
-      {!this.state.orderplaced  
-        ?(
-          <Aux>
-            <Backdrop show={!this.state.orderplaced} />
-            <Spinner />
-          </Aux>
-        ) 
-        : null}
         {burger}
-      
       </div>
     );
   }

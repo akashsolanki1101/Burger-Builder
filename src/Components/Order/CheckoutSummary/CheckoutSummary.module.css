@@ -1,0 +1,39 @@
+.checkoutSummary{
+    display : flex;
+    flex-flow: column;
+    align-items : center;
+    justify-content: space-around;
+    /* width :50%; */
+    margin: auto;
+}
+
+@media (min-width : 600px) {
+    .checkoutSummary {
+        width : 500px;
+    }
+}
+
+.Button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 0px;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.Button:first-of-type {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.Success {
+    color: #5C9210;
+}
+
+.Danger {
+    color: #944317;
+}
