@@ -15,17 +15,29 @@ class ContactData extends Component {
             postalcode : ""
         },
         placeOrder : false,
-        orderplaced : true
+        orderplaced : true,
+        ingredients : null,
+        totalprice : null 
     }
 
     orderHandler = (event)=>{
         event.preventDefault();
-        // console.log(this.props.ingredients)
-        this.setState({ placeOrder: false });
-        this.setState({ orderplaced: false });
+        let ingredients ={}
+        for(let ingredientname in this.props.ingredients)
+        {
+            if(ingredientname==="price")
+            {
+                this.setState({totalprice : this.props.ingredients[ingredientname]})
+            }
+            else
+            {
+                 ingredients[ingredientname] = this.props.ingredients[ingredientname]
+            }
+        }
+        this.setState({ placeOrder: false,orderplaced: false,ingredients : ingredients });        
         const order = {
-        ingredients: this.props.ingredients,
-        totalprice: this.state.totalPrice,
+        ingredients: ingredients,
+        totalprice: this.props.ingredients.price,
         address: {
             name: "max",
             number: 123,

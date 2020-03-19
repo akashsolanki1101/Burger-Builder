@@ -24,7 +24,6 @@ class Checkout extends Component {
             }
         }
         this.setState({ingredients : ingredients,price : price})
-        console.log(price)
     }
     
     checkoutCancelled = ()=>{
@@ -36,7 +35,6 @@ class Checkout extends Component {
     }
     
     render(){
-        console.log(this.props)
         return (
             <div>
                 <CheckoutSummary ingredients = {this.state.ingredients}

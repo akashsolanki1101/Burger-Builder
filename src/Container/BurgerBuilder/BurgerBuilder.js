@@ -41,13 +41,9 @@ class BurgerBuilder extends Component {
       });
   }
 
-  // purchaseControlHandler = () => {
-  //    };
+
 
   readyToCheckout = ()=>{
-    // this.setState({ placeOrder: false });
-    // this.setState({checkout : true})
-
     const queryParams = [];
     for(let i in this.state.ingredients)
     {

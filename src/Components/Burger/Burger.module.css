@@ -1,15 +1,11 @@
 .Burger{
-    height : 400px;
+    height : 370px;
     width :500px;
     margin: auto;
     padding-top: 10px;
     text-align: center;
     font-size: 150%;
-    /* display :flex; */
-    /* flex-flow: column; */
-    /* justify-content: center; */
     overflow: auto ;
-    /* justify-content: space-betwee; */
   }
 
   
