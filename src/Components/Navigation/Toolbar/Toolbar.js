@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import classes from './Toolbar.module.css' 
-import Logo from '../../../UI/Logo/Logo'
+import Logo from '../../UI/Logo/Logo'
 import SideDrawer from './SideDrawer/sideDrawer'
-import Aux from '../../../hoc/Auxiliary'
+import Aux from '../../hoc/Auxiliary'
 import Backdrop from '../../Backdrop/Backdrop'
 import NavigationItems from '../Navigation Items/NavigationItems'
-import Hamburger from '../../../UI/Hamburger/Hamburger'
+import Hamburger from '../../UI/Hamburger/Hamburger'
 
 class Toolbar extends Component{
     state ={

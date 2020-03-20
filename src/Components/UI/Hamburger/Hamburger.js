@@ -1,6 +1,6 @@
 import React from 'react'
 
-import image from '../../Assets/hamburger.png'
+import image from '../../../Assets/hamburger.png'
 import classes from './Hamburger.module.css';
 
 const hamburger = ()=>{

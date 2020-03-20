@@ -7,10 +7,7 @@
     box-sizing: border-box;
 }
 
-input{
-    display : block;
-    margin-left : 20px;
-}
+
 
 .Button {
     background-color: transparent;

@@ -1,0 +1,22 @@
+.InputElement{
+    width : 100%;
+    padding : 15px;
+    margin : auto;
+    box-sizing: border-box;
+}
+
+Input{
+    display : block;
+    width : 90%;
+    border : 1px solid #ccc;
+    padding : 5px;
+    font-weight: bold;
+    background-color : white;
+    outline : none;
+    margin : auto;
+}
+
+Input:focus{
+    outline : none;
+    background-color : #ccc;
+}  

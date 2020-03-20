@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "./Modal.module.css";
 import Backdrop from '../../Components/Backdrop/Backdrop'
-import Aux from "../../hoc/Auxiliary";
+import Aux from "../hoc/Auxiliary";
 
 const modal = props => {
   let clases = [classes.Modal];

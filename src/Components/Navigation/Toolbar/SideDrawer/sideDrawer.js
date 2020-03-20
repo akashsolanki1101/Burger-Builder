@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "./sideDrawer.module.css";
-import Aux from '../../../../hoc/Auxiliary'
+import Aux from '../../../hoc/Auxiliary'
 import NavigationItems from '../../Navigation Items/NavigationItems'
 
 const sideDrawer = props => {

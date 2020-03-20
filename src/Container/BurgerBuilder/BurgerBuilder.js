@@ -6,9 +6,9 @@ import classes from "./BurgerBuilder.module.css";
 import Modal from "../../Components/Modal/Modal";
 // import Backdrop from "../../Components/Backdrop/Backdrop";
 import axios from "../../axios-orders";
-import Spinner from "../../UI/Spinner/Spinner";
-import Aux from "../../hoc/Auxiliary";
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
+import Spinner from "../../Components/UI/Spinner/Spinner";
+import Aux from "../../Components/hoc/Auxiliary";
+import withErrorHandler from '../../Components/hoc/withErrorHandler/withErrorHandler'
 import OrderSummary from '../../Components/OrderSummary/OrderSummary'
 
 class BurgerBuilder extends Component {
