@@ -19,4 +19,21 @@ Input{
 Input:focus{
     outline : none;
     background-color : #ccc;
-}  
+} 
+
+Select{
+    color : black;
+    display : block;
+    width : 93%;
+    border : 1px solid #ccc;
+    padding : 5px;
+    font-weight: bold;
+    background-color : white;
+    outline : none;
+    margin : auto;
+}
+
+/* Select:focus{
+    outline : none;
+    background-color : #ccc;
+} */

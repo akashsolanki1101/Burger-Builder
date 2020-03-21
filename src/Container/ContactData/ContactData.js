@@ -6,7 +6,7 @@ import Backdrop from '../../Components/Backdrop/Backdrop'
 import Spinner from '../../Components/UI/Spinner/Spinner'
 import Aux from '../../Components/hoc/Auxiliary' 
 import Input from '../../Components/UI/Input/InputElement'
-
+import Gif from '../../Components/UI/TickMark/TickMark'
 class ContactData extends Component {
     state = {
         orderForm : {
@@ -14,7 +14,7 @@ class ContactData extends Component {
                 elementType : 'input',
                 elementConfig : {
                     type : 'text',
-                    placeholder : 'Your Name'
+                    placeholder : 'Your Full Name'
                 },
                 validation : {
                     required : true
@@ -53,7 +53,7 @@ class ContactData extends Component {
                 elementType : 'input',
                 elementConfig : {
                     type : 'text',
-                    placeholder : 'Zip Code'
+                    placeholder : 'Postal Code'
                 },
                 validation : {
                     required : true
@@ -91,14 +91,36 @@ class ContactData extends Component {
                 }
         },
         placeOrder : false,
-        orderplaced : true,
+        requestProceed : true,
+        orderplaced : false,
         ingredients : null,
-        totalprice : null 
-}
+        totalprice : null
+    }
+
+    checkValidation = ()=>{
+        if()
+    }
+
+    onChangeHandler(event,id){
+        
+        let updatedOrderForm = {
+            ...this.state.orderForm
+        }
+
+        let updatedConfig = {
+            ...updatedOrderForm[id]
+        }
+        updatedConfig.value = event.target.value;
+        updatedConfig.valid = 
+        updatedOrderForm[id].value = updatedConfig.value;
+
+        this.setState({orderForm : updatedOrderForm})
+    }
 
     orderHandler = (event)=>{
         event.preventDefault();
         let ingredients ={}
+        let ContactData = {}
         
         for(let ingredientname in this.props.ingredients)
         {
@@ -112,26 +134,35 @@ class ContactData extends Component {
             }
         }
         
-        this.setState({ placeOrder: false,orderplaced: false,ingredients : ingredients });        
+        this.setState({ placeOrder: false,requestProceed: false,ingredients : ingredients });        
         
+        for(let key in this.state.orderForm)
+        {
+            ContactData[key] = this.state.orderForm[key].value
+        }
+
+        console.log(ContactData);
+        
+
         const order = {
         ingredients: ingredients,
         totalprice: this.props.ingredients.price,
+        ContactData : ContactData
         }
 
         axios
         .post("/orders.json", order)
         .then(response => {
-            this.setState({ orderplaced: true });
+            this.setState({ requestProceed: true ,orderplaced : true});
         })
         .catch(error => {
             console.log(error);
         });
-        
-        if(this.state.orderplaced)
-        {
-            this.props.history.replace('/')
-        }
+    }
+
+    redirectToHome= ()=>{
+        this.setState({orderplaced : false})
+        this.props.history.replace('/')
     }
 
     render(){
@@ -144,9 +175,8 @@ class ContactData extends Component {
             })
         }
 
-        console.log(inputElement);
-
         return (
+            <Aux>
             <div className={classes.ContactData}>
                 <h3>Enter your Contact Data</h3>
                 <form >
@@ -156,22 +186,35 @@ class ContactData extends Component {
                             key={element.id} 
                             elementConfig={element.configProperty.elementConfig}
                             elementType={element.configProperty.elementType}
-                            value={element.configProperty.value}/> 
+                            value={element.configProperty.value}
+                            onChange={(event)=>this.onChangeHandler(event,element.id)}/> 
                         })
                     }
                     <button className={[classes.Button,classes.Success].join(' ')} onClick={this.orderHandler}>ORDER</button>
                 </form>
 
-                {!this.state.orderplaced  
+                {!this.state.requestProceed
                     ?(
-                      <Aux>
-                        <Backdrop show={!this.state.orderplaced} />
-                        <Spinner />
-                      </Aux>
+                        <Aux>
+                            <Backdrop show={!this.state.requestProceed} />
+                            <Spinner />
+                        </Aux>
                     ) 
-                    : null}
+                    : null
+                }
+                </div>
+                {this.state.orderplaced
+                    ?(
+                        <Aux>
+                            <Backdrop show={this.state.orderplaced} cancel={this.redirectToHome}/>
+                            <Gif />
+                        </Aux>
+                    )
+                    :null
+                }
 
-            </div>
+            
+        </Aux>
         )
     }
 }

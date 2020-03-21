@@ -3,19 +3,20 @@ import classes from './InputElement.module.css';
 
 const input = (props)=>
 {
-    console.log("Akash",props)
     let inputElement = null;
 
     switch(props.elementType)
     {
         case("input") :
             inputElement = <input 
+                onChange={props.onChange}
                 className={classes.Input} 
                 {...props.elementConfig}
                 value={props.value}/>
             break;
         case("textarea") :
-            inputElement = <textarea 
+            inputElement = <textarea
+                onChange={props.onChange} 
                 className={classes.Input}
                 {...props.elementConfig}
                 value={props.value}/>
@@ -23,8 +24,9 @@ const input = (props)=>
         case("select") :
             inputElement =
             ( 
-            <select 
-                className={classes.Input}
+            <select
+                onChange={props.onChange}
+                className={classes.Select}
                 value={props.value}>
                 {
                     props.elementConfig.options.map(option=>{
@@ -39,7 +41,11 @@ const input = (props)=>
             )
             break;
         default:
-            inputElement = <input className={classes.Input}/>
+            inputElement = <input 
+            onChange={props.onChange}
+            className={classes.Input}
+            {...props.elementConfig}
+            value={props.value}/>
             break;
     }
 
