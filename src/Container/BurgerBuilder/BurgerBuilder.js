@@ -11,6 +11,7 @@ import Aux from "../../Components/hoc/Auxiliary";
 import withErrorHandler from '../../Components/hoc/withErrorHandler/withErrorHandler'
 import OrderSummary from '../../Components/OrderSummary/OrderSummary'
 import {connect} from 'react-redux'
+import * as actionType from '../../store/Actions/Actions'
 
 class BurgerBuilder extends Component {
   state = {
@@ -22,16 +23,9 @@ class BurgerBuilder extends Component {
   };
 
   
-  // componentDidMount() {
-    //   axios
-    //     .get("/ingredients.json")
-    //     .then(response => {
-      //       this.setState({ ingredients: response.data, ingredientsLoaded: true });
-  //     })
-  //     .catch(error => {
-    //       console.log(error);
-    //     });
-  // }
+  componentDidMount() {
+    this.props.loadIngredient();
+  }
   
   purchaseAble=()=>{
     let check = 0;
@@ -118,8 +112,9 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return{
-    addIngredient : (ingredientName)=> dispatch({type : "ADD_INGREDIENTS",ingredientName : ingredientName}),
-    removeIngredient : (ingredientName)=> dispatch({type :"REMOVE_INGREDIENTS",ingredientName : ingredientName})
+    addIngredient : (ingredientName)=> dispatch(actionType.addIngredient(ingredientName)),
+    removeIngredient : (ingredientName)=> dispatch(actionType.removeIngredient(ingredientName)),
+    loadIngredient : ()=> dispatch(actionType.loadIngredient())
   }
 }
 

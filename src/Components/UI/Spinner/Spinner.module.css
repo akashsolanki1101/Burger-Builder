@@ -2,7 +2,7 @@
 .loader{
   position : absolute;
   top : 40%;
-  left : 46%;
+  left : 48%;
   height : 130px;
   width : 130px;
   z-index : 500;
@@ -76,3 +76,9 @@
     transform:translate(0,0);
   }
 } */
+
+@media (max-width : 500px){
+ .loader{
+   left : 41%;
+ } 
+}
