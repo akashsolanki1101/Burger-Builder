@@ -9,6 +9,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk'
 import orderReducer from './Container/Orders/store/Reducers/Reducer'
 import burgerBuilderReducer from './Container/BurgerBuilder/store/Reducers/Reducer'
+import contactDataReducer from './Container/ContactData/store/Reducer/Reducer'
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,7 +22,8 @@ const logger = store=>next=>action=>{
 
 const rootReducer = combineReducers({
     orderReducer  : orderReducer,
-    burgerBuilderReducer : burgerBuilderReducer
+    burgerBuilderReducer : burgerBuilderReducer,
+    contactDataReducer : contactDataReducer
 })
 
 const store = createStore(rootReducer,composeEnhancer(applyMiddleware(logger,thunk)));
