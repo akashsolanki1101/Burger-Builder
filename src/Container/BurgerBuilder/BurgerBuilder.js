@@ -11,7 +11,7 @@ import Aux from "../../Components/hoc/Auxiliary";
 import withErrorHandler from '../../Components/hoc/withErrorHandler/withErrorHandler'
 import OrderSummary from '../../Components/OrderSummary/OrderSummary'
 import {connect} from 'react-redux'
-import * as actionType from '../../store/Actions/Actions'
+import * as actionType from './store/Actions/Actions'
 
 class BurgerBuilder extends Component {
   state = {
