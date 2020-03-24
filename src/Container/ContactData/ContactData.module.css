@@ -12,7 +12,7 @@
 .Button {
     background-color: transparent;
     border: none;
-    color: white;
+    color: #5C9210;
     outline: none;
     cursor: pointer;
     font: inherit;
@@ -21,9 +21,11 @@
     font-weight: bold;
 }
 
-.Success {
-    color: #5C9210;
+.Button:disabled{
+    color : #ccc;
+    cursor: not-allowed;
 }
+
 
 
 @media(min-width : 600px){

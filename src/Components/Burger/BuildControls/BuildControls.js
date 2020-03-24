@@ -11,7 +11,6 @@ const controls =[
 ]
 
 const buildControls = (props)=>{
-    let  disabled = props.OrderSummary ? null : "disabled";
     return(
         <div className={classes.BuildControls}>
             <h4 style={{textAlign:"center"}}>Current Price : ${props.price}</h4>
@@ -24,7 +23,7 @@ const buildControls = (props)=>{
                         addIngredient={()=>props.addIngredient(ctrl.type)}
                         removeIngredient={()=>props.removeIngredient(ctrl.type)}/>)
             }
-            <button className={classes.OrderButton} disabled={disabled} onClick={props.placeorder}>Order Now</button>
+            <button className={classes.OrderButton} disabled={!props.purchaseAble} onClick={props.placeorder}>Order Now</button>
         </div>
 )}
 

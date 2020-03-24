@@ -33,7 +33,12 @@ Select{
     margin : auto;
 }
 
-/* Select:focus{
-    outline : none;
-    background-color : #ccc;
-} */
+.ValidationFeedback{
+    border  : 1px solid salmon;
+    background-color: salmon;
+}
+
+.validationError{
+    color : red;
+    margin : 5px 0;
+}

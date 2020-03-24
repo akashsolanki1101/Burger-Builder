@@ -7,6 +7,8 @@ import Spinner from '../../Components/UI/Spinner/Spinner'
 import Aux from '../../Components/hoc/Auxiliary' 
 import Input from '../../Components/UI/Input/InputElement'
 import Gif from '../../Components/UI/TickMark/TickMark'
+import {connect} from 'react-redux'
+
 class ContactData extends Component {
     state = {
         orderForm : {
@@ -19,8 +21,10 @@ class ContactData extends Component {
                 validation : {
                     required : true
                 },
+                errorMessage : 'Please Enter Valid Name',
                 value : '',
-                valid : true
+                valid : false,
+                touched : false,
             },
 
             country : {
@@ -32,8 +36,10 @@ class ContactData extends Component {
                 validation : {
                     required : true
                 },
+                errorMessage : 'Please Enter Valid Country Name',
                 value : '',
-                valid : true
+                valid : false,
+                touched : false,
             },
 
             street : {
@@ -45,8 +51,10 @@ class ContactData extends Component {
                 validation : {
                     required : true
                 },
+                errorMessage : 'Please Enter Valid Street Name',
                 value : '',
-                valid : true
+                valid : false,
+                touched : false,
                 },
 
             zipcode : {
@@ -56,10 +64,14 @@ class ContactData extends Component {
                     placeholder : 'Postal Code'
                 },
                 validation : {
-                    required : true
+                    required : true,
+                    minlength : 6,
+                    maxlength : 6,
                 },
+                errorMessage : 'Please Enter Valid 6 Digit Postal Code',
                 value : '',
-                valid : true
+                valid : false,
+                touched : false,
                 },
 
             email : {
@@ -71,8 +83,10 @@ class ContactData extends Component {
                 validation : {
                     required : true
                 },
+                errorMessage : 'Please Enter Valid Email Address',
                 value : '',
-                valid : true
+                valid : false,
+                touched : false,
                 },
 
             deliverymode : {
@@ -87,18 +101,35 @@ class ContactData extends Component {
                     required : true
                 },
                 value : 'Fastest',
-                valid : true
+                valid : 'true'
                 }
         },
         placeOrder : false,
         requestProceed : true,
         orderplaced : false,
-        ingredients : null,
-        totalprice : null
+        formIsValid : false
     }
 
-    checkValidation = ()=>{
-        if()
+    checkValidation = (value,rules)=>{
+       let isValid = true;
+
+       if(rules.required)
+       {
+           isValid = value.trim() !== "" && isValid;
+       }
+
+       if(rules.minlength)
+       {
+           isValid = (value.length >=rules.minlength) && isValid;
+       }
+       
+       if(rules.maxlength)
+       {
+           isValid = (value.length <= rules.maxlength) && isValid;
+       }
+       
+       return isValid;
+
     }
 
     onChangeHandler(event,id){
@@ -111,42 +142,32 @@ class ContactData extends Component {
             ...updatedOrderForm[id]
         }
         updatedConfig.value = event.target.value;
-        updatedConfig.valid = 
-        updatedOrderForm[id].value = updatedConfig.value;
+        updatedConfig.valid = this.checkValidation(updatedConfig.value,updatedConfig.validation ) 
+        updatedConfig.touched = true;
+        updatedOrderForm[id] = updatedConfig;
 
-        this.setState({orderForm : updatedOrderForm})
+        let formIsValid = true;
+        for(let key in this.state.orderForm)
+        {
+            formIsValid = formIsValid && updatedOrderForm[key].valid;
+        }
+        this.setState({orderForm : updatedOrderForm,formIsValid : formIsValid})
     }
 
     orderHandler = (event)=>{
         event.preventDefault();
-        let ingredients ={}
         let ContactData = {}
-        
-        for(let ingredientname in this.props.ingredients)
-        {
-            if(ingredientname==="price")
-            {
-                this.setState({totalprice : this.props.ingredients[ingredientname]})
-            }
-            else
-            {
-                 ingredients[ingredientname] = this.props.ingredients[ingredientname]
-            }
-        }
-        
-        this.setState({ placeOrder: false,requestProceed: false,ingredients : ingredients });        
+                
+        this.setState({ placeOrder: false,requestProceed: false});        
         
         for(let key in this.state.orderForm)
         {
             ContactData[key] = this.state.orderForm[key].value
         }
 
-        console.log(ContactData);
-        
-
         const order = {
-        ingredients: ingredients,
-        totalprice: this.props.ingredients.price,
+        ingredients: this.props.ingredients,
+        totalprice: this.props.price,
         ContactData : ContactData
         }
 
@@ -183,6 +204,9 @@ class ContactData extends Component {
                     {
                         inputElement.map(element=>{
                             return <Input
+                            errorMessage={element.configProperty.errorMessage}
+                            touched={element.configProperty.touched}
+                            valid={element.configProperty.valid}
                             key={element.id} 
                             elementConfig={element.configProperty.elementConfig}
                             elementType={element.configProperty.elementType}
@@ -190,7 +214,7 @@ class ContactData extends Component {
                             onChange={(event)=>this.onChangeHandler(event,element.id)}/> 
                         })
                     }
-                    <button className={[classes.Button,classes.Success].join(' ')} onClick={this.orderHandler}>ORDER</button>
+                    <button disabled={!this.state.formIsValid} className={classes.Button} onClick={this.orderHandler}>ORDER</button>
                 </form>
 
                 {!this.state.requestProceed
@@ -219,4 +243,12 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+
+const mapStateToProps = state =>{
+    return{
+        ingredients : state.ingredients,
+        price : state.totalPrice    
+    }
+}
+
+export default connect(mapStateToProps)(ContactData);
