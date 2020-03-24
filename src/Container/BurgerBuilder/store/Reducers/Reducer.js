@@ -3,6 +3,7 @@ import * as actionType from '../Actions/Actions'
 const initialState = {
     ingredients : {},
     totalPrice : 2,
+    ingredientsLoaded : false
 }
 
 const ingredientsPrice = {
@@ -20,7 +21,8 @@ const reducer = (state = initialState,action)=>{
             return{
                 ...state,
                 ingredients : action.ingredients,
-                totalPrice : 2
+                totalPrice : 2,
+                ingredientsLoaded : true
             }
         }
         

@@ -236,8 +236,6 @@ class ContactData extends Component {
                     )
                     :null
                 }
-
-            
         </Aux>
         )
     }
@@ -246,8 +244,8 @@ class ContactData extends Component {
 
 const mapStateToProps = state =>{
     return{
-        ingredients : state.ingredients,
-        price : state.totalPrice    
+        ingredients : state.burgerBuilderReducer.ingredients,
+        price : state.burgerBuilderReducer.totalPrice    
     }
 }
 

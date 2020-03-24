@@ -73,7 +73,7 @@ class BurgerBuilder extends Component {
     
     let burger = <Spinner />;
 
-    if (this.state.ingredientsLoaded) {
+    if (this.props.ingredientsLoaded) {
       burger = (
         
         <Aux>
@@ -105,8 +105,9 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state =>{
   return {
-    ingredients : state.ingredients,
-    totalPrice : state.totalPrice
+    ingredients : state.burgerBuilderReducer.ingredients,
+    totalPrice : state.burgerBuilderReducer.totalPrice,
+    ingredientsLoaded : state.burgerBuilderReducer.ingredientsLoaded
   }
 }
 

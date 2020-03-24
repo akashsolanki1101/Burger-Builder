@@ -6,24 +6,6 @@ import {connect} from 'react-redux'
 
 class Checkout extends Component {
 
-    // componentWillMount(){
-    //     const query = new URLSearchParams(this.props.location.search)
-    //     console.log(query)
-    //     const ingredients = {}
-    //     let price = 0
-    //     for(let i of query.entries())
-    //     { 
-    //         if(i[0]===price)
-    //         {
-    //             price = i[1]
-    //         }
-    //         else{
-    //             ingredients[i[0]] = +i[1];
-    //         }
-    //     }
-    //     this.setState({ingredients : ingredients,price : price})
-    // }
-    
     checkoutCancelled = ()=>{
         this.props.history.goBack();
     }
@@ -52,7 +34,7 @@ class Checkout extends Component {
 
 const mapStateToProps = state =>{
     return{
-        ingredients : state.ingredients,
+        ingredients : state.burgerBuilderReducer.ingredients,
     }
 }
 

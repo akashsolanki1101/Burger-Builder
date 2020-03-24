@@ -2,37 +2,18 @@ import React, { Component } from 'react'
 
 import Order from '../../Components/Order/Order'
 import {withRouter} from 'react-router-dom'
-import axios from '../../axios-orders'
+// import axios from '../../axios-orders'
+import {connect} from 'react-redux'
+import * as actionTypes from './store/Actions/Actions'
 
 class Orders extends Component {
-    state = {
-        orders : [],
-        loading : true
-    }
 
     componentDidMount(){
-        axios.get("/orders.json")
-        .then(res=>{
-            this.setState({loading:false})
-            let orders = []
-            for(let ingredientname in res.data)
-            {
-                orders.push({
-                    ...res.data[ingredientname],
-                    id : ingredientname
-                })
-            }
-            this.setState({orders : orders})
-        })
-        .catch(err=>{
-            console.log(err)
-            this.setState({loading:false})
-        }
-        )
+        this.props.loadOrders();
     }
 
     render(){
-        let orders = this.state.orders.map(order => {
+        let orders = this.props.orders.map(order => {
             return(
                 <Order key={order.id} price ={order.totalprice} ingredients = {order.ingredients} />
         )})
@@ -44,4 +25,19 @@ class Orders extends Component {
     }
 }
 
-export default withRouter(Orders);
+const mapStateToProps = state=> {
+    return (
+        {
+            orders  : state.orderReducer.orders,
+            loading : state.orderReducer.loading
+        }
+    )
+}
+
+const mapDispatchToProps = dispatch =>{
+    return {
+        loadOrders : ()=>dispatch(actionTypes.loadOrders())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Orders));
