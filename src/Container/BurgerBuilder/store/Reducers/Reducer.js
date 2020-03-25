@@ -1,9 +1,11 @@
+//Burger Builder Reducer
+
 import * as actionType from '../Actions/Actions'
 
 const initialState = {
-    ingredients : {},
+    ingredients : null,
     totalPrice : 2,
-    ingredientsLoaded : false
+    error : false
 }
 
 const ingredientsPrice = {
@@ -22,7 +24,7 @@ const reducer = (state = initialState,action)=>{
                 ...state,
                 ingredients : action.ingredients,
                 totalPrice : 2,
-                ingredientsLoaded : true
+                error : false
             }
         }
         
@@ -50,6 +52,12 @@ const reducer = (state = initialState,action)=>{
             }
         }
 
+        case(actionType.FetchingIngredientserror):{
+            return {
+                ...state,
+                error : true
+            }
+        }
 
         default : 
             return state;

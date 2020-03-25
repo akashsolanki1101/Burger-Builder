@@ -12,13 +12,13 @@ const order = (props)=>{
         })
     }
     const ingredientlist = ingredients.map(ingredient=>{
-        return <span key={ingredient.name} style={{textTransform : "capitalize"}}>{ingredient.name}({ingredient.amount}) </span>
+        return <span className={classes.Ingredient} key={ingredient.name} style={{textTransform : "capitalize"}}>{ingredient.name}({ingredient.amount}) </span>
     })
    
     return(
     <div className={classes.Order}>
         <p>Ingredients :{ingredientlist}</p>
-        <p>Price: {props.price}<strong>$</strong></p>
+        <p>Price: <strong> {props.price}$</strong></p>
     </div>
 )}
 

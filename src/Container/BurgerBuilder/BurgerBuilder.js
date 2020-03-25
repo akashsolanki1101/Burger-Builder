@@ -71,9 +71,9 @@ class BurgerBuilder extends Component {
     />)  
     }
     
-    let burger = <Spinner />;
+    let burger =this.props.error ? <p>Ingredients can't be loaded</p>: <Spinner />;
 
-    if (this.props.ingredientsLoaded) {
+    if (this.props.ingredients) {
       burger = (
         
         <Aux>
@@ -107,7 +107,7 @@ const mapStateToProps = state =>{
   return {
     ingredients : state.burgerBuilderReducer.ingredients,
     totalPrice : state.burgerBuilderReducer.totalPrice,
-    ingredientsLoaded : state.burgerBuilderReducer.ingredientsLoaded
+    error : state.burgerBuilderReducer.error
   }
 }
 

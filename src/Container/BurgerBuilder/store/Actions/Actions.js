@@ -2,6 +2,7 @@ import axios from '../../../../axios-orders';
 export const Addingredient = "ADD_INGREDIENTS";
 export const Removeingredient = "REMOVE_INGREDIENTS";
 export const Loadingredient =  "LOAD_INGREDIENTS";
+export const FetchingIngredientserror = "FETCHING_INGREDIENTS_ERROR"
 
 export const addIngredient = (ingredientName)=>{
     return{
@@ -24,6 +25,12 @@ const saveIngredient =(ingredients)=> {
     }
 }
 
+const fetchIngredientsError = ()=>{
+    return{
+        type : FetchingIngredientserror
+    }
+}
+
 export const loadIngredient = ()=>{
     return dispatch=>{
         axios
@@ -32,7 +39,7 @@ export const loadIngredient = ()=>{
             dispatch(saveIngredient(response.data))
       })
       .catch(error => {
-          console.log(error);
+          dispatch(fetchIngredientsError())
         });
     }
 }

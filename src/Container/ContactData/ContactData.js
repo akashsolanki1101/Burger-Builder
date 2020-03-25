@@ -8,6 +8,9 @@ import Aux from '../../Components/hoc/Auxiliary'
 import Input from '../../Components/UI/Input/InputElement'
 import Gif from '../../Components/UI/TickMark/TickMark'
 import {connect} from 'react-redux'
+import * as actionTypes from './store/Actions/Actions'
+import WithErrorHandler from '../../Components/hoc/withErrorHandler/withErrorHandler'
+
 
 class ContactData extends Component {
     state = {
@@ -60,7 +63,7 @@ class ContactData extends Component {
             zipcode : {
                 elementType : 'input',
                 elementConfig : {
-                    type : 'text',
+                    type : 'number',
                     placeholder : 'Postal Code'
                 },
                 validation : {
@@ -78,7 +81,7 @@ class ContactData extends Component {
                 elementType : 'input',
                 elementConfig : {
                     type : 'email',
-                    placeholder : 'Your E-Mail'
+                    placeholder : 'Your E-Mail',
                 },
                 validation : {
                     required : true
@@ -158,7 +161,8 @@ class ContactData extends Component {
         event.preventDefault();
         let ContactData = {}
                 
-        this.setState({ placeOrder: false,requestProceed: false});        
+        this.setState({ placeOrder: false});
+        this.props.requestProceedHandler()
         
         for(let key in this.state.orderForm)
         {
@@ -171,18 +175,11 @@ class ContactData extends Component {
         ContactData : ContactData
         }
 
-        axios
-        .post("/orders.json", order)
-        .then(response => {
-            this.setState({ requestProceed: true ,orderplaced : true});
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        this.props.placeOrder(order)
     }
 
     redirectToHome= ()=>{
-        this.setState({orderplaced : false})
+        this.props.orderPlacedHandler();
         this.props.history.replace('/')
     }
 
@@ -194,6 +191,14 @@ class ContactData extends Component {
                 id : key,
                 configProperty : this.state.orderForm[key]
             })
+        }
+
+        let orderConfirmationMessage = null;
+
+        if(this.props.orderPlaced)
+        {
+            orderConfirmationMessage = <div><Backdrop show={this.props.orderPlaced} cancel={this.redirectToHome}/>
+                <Gif /></div>
         }
 
         return (
@@ -216,26 +221,20 @@ class ContactData extends Component {
                     }
                     <button disabled={!this.state.formIsValid} className={classes.Button} onClick={this.orderHandler}>ORDER</button>
                 </form>
-
-                {!this.state.requestProceed
+                </div>
+                
+                {!this.props.requestProceed
                     ?(
                         <Aux>
-                            <Backdrop show={!this.state.requestProceed} />
+                            <Backdrop show={!this.props.requestProceed} />
                             <Spinner />
                         </Aux>
                     ) 
                     : null
                 }
+                <div>
+                    {orderConfirmationMessage}
                 </div>
-                {this.state.orderplaced
-                    ?(
-                        <Aux>
-                            <Backdrop show={this.state.orderplaced} cancel={this.redirectToHome}/>
-                            <Gif />
-                        </Aux>
-                    )
-                    :null
-                }
         </Aux>
         )
     }
@@ -245,8 +244,19 @@ class ContactData extends Component {
 const mapStateToProps = state =>{
     return{
         ingredients : state.burgerBuilderReducer.ingredients,
-        price : state.burgerBuilderReducer.totalPrice    
+        price : state.burgerBuilderReducer.totalPrice,
+        requestProceed : state.contactDataReducer.requestProceed,
+        orderPlaced : state.contactDataReducer.orderPlaced,
+        error : state.contactDataReducer.error 
     }
 }
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch =>{
+    return{
+        placeOrder : (order)=>dispatch(actionTypes.placeOrder(order)),
+        requestProceedHandler : ()=>dispatch(actionTypes.requestProceed()),
+        orderPlacedHandler : ()=>dispatch(actionTypes.orderPlaced())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(WithErrorHandler(ContactData,axios));

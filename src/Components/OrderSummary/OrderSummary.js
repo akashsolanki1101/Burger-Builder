@@ -22,8 +22,8 @@ const orderSummary = (props)=>{
                 {content}
             </ul>
             <h4>Price-${props.price}</h4>
-            <button className={[classes.Success,classes.Button].join(' ')} onClick={props.Checkout}>Checkout</button>
-            <button className={[classes.Danger,classes.Button].join(' ')} onClick={props.cancelOrder}>Cancel</button>
+            <button className={[classes.Success,classes.Button].join(' ')} onClick={props.Checkout}>CHECKOUT</button>
+            <button className={[classes.Danger,classes.Button].join(' ')} onClick={props.cancelOrder}>CANCEL</button>
         </div>
     )
 }
