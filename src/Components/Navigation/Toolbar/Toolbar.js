@@ -25,7 +25,7 @@ class Toolbar extends Component{
     render(){
         return(
             <Aux>
-                <SideDrawer sideDrawer={this.state.sideDrawer}/>
+                <SideDrawer sideDrawer={this.state.sideDrawer} isSignUp={this.props.token}/>
                 <Backdrop cancel={this.hideSideDrawer}
                             show={this.state.sideDrawer}/>
                 <header className={classes.Toolbar}>
@@ -33,8 +33,8 @@ class Toolbar extends Component{
                     <Logo />
                     <div className={classes.DesktopOnly}>
                     <NavigationItems 
-                        isSignUp={this.props.token}
-                        LogOut={this.props.logOut}/></div>
+                        isSignUp={this.props.token}  
+                    /></div>
                 </header>
             </Aux>
     )

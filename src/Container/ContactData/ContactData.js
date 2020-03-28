@@ -186,8 +186,9 @@ class ContactData extends Component {
 
         const order = {
         ingredients: this.props.ingredients,
-        totalprice: this.props.price,
-        ContactData : ContactData
+        totalPrice: this.props.price,
+        contactData : ContactData,
+        userId : this.props.userId
         }
 
         this.props.placeOrder(order,this.props.token)
@@ -263,7 +264,8 @@ const mapStateToProps = state =>{
         requestProceed : state.contactDataReducer.requestProceed,
         orderPlaced : state.contactDataReducer.orderPlaced,
         error : state.contactDataReducer.error,
-        token : state.authReducer.token
+        token : state.authReducer.token,
+        userId : state.authReducer.userId
     }
 }
 
