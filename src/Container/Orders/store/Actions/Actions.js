@@ -10,9 +10,9 @@ const saveOrders = (orders,loadingValue)=>{
     }
 }
 
-export const loadOrders = (dispatch)=>{
+export const loadOrders = (token)=>{
     return dispatch =>{
-        axios.get("/orders.json")
+        axios.get("/orders.json?auth=" + token)
         .then(res=>{
             let orders = []
             for(let ingredientname in res.data)

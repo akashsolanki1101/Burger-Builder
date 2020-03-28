@@ -63,13 +63,14 @@ class ContactData extends Component {
             zipcode : {
                 elementType : 'input',
                 elementConfig : {
-                    type : 'number',
+                    type : 'text',
                     placeholder : 'Postal Code'
                 },
                 validation : {
                     required : true,
                     minlength : 6,
                     maxlength : 6,
+                    isNumeric : true
                 },
                 errorMessage : 'Please Enter Valid 6 Digit Postal Code',
                 value : '',
@@ -84,7 +85,8 @@ class ContactData extends Component {
                     placeholder : 'Your E-Mail',
                 },
                 validation : {
-                    required : true
+                    required : true,
+                    isEmail : true
                 },
                 errorMessage : 'Please Enter Valid Email Address',
                 value : '',
@@ -130,7 +132,20 @@ class ContactData extends Component {
        {
            isValid = (value.length <= rules.maxlength) && isValid;
        }
+
+       if(rules.isEmail)
+       {
+           const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ ;
+           isValid = pattern.test(value) && isValid;
+
+       }
        
+       if(rules.isNumeric)
+       {
+           const pattern = /^\d+$/ ;
+           isValid = pattern.test(value) && isValid;
+       }
+
        return isValid;
 
     }
@@ -175,7 +190,7 @@ class ContactData extends Component {
         ContactData : ContactData
         }
 
-        this.props.placeOrder(order)
+        this.props.placeOrder(order,this.props.token)
     }
 
     redirectToHome= ()=>{
@@ -247,13 +262,14 @@ const mapStateToProps = state =>{
         price : state.burgerBuilderReducer.totalPrice,
         requestProceed : state.contactDataReducer.requestProceed,
         orderPlaced : state.contactDataReducer.orderPlaced,
-        error : state.contactDataReducer.error 
+        error : state.contactDataReducer.error,
+        token : state.authReducer.token
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return{
-        placeOrder : (order)=>dispatch(actionTypes.placeOrder(order)),
+        placeOrder : (order,token)=>dispatch(actionTypes.placeOrder(order,token)),
         requestProceedHandler : ()=>dispatch(actionTypes.requestProceed()),
         orderPlacedHandler : ()=>dispatch(actionTypes.orderPlaced())
     }

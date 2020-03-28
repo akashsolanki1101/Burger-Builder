@@ -35,6 +35,8 @@ class BurgerBuilder extends Component {
       check = check + this.props.ingredients[key];
     }
 
+    this.props.purchaseableHandler(check>0)
+
     return check > 0;
   }
 
@@ -46,6 +48,10 @@ class BurgerBuilder extends Component {
     const updatedPlaceOrder = true;
     this.setState({ placeOrder: updatedPlaceOrder });
   };
+
+  redirectToAuth = ()=>{
+    this.props.history.push("/auth");
+  }
 
   cancelOrder = () => {
     const updatedPlaceOrder = false;
@@ -84,7 +90,8 @@ class BurgerBuilder extends Component {
             addIngredient={this.props.addIngredient}
             removeIngredient={this.props.removeIngredient}
             purchaseAble={this.purchaseAble()}
-            placeorder={this.placeOrder}
+            placeorder={this.props.isSignUp ? this.placeOrder : this.redirectToAuth}
+            isSignUp={this.props.isSignUp}
           />
           
           <Modal show={this.state.placeOrder} cancel={this.cancelOrder}>
@@ -107,7 +114,8 @@ const mapStateToProps = state =>{
   return {
     ingredients : state.burgerBuilderReducer.ingredients,
     totalPrice : state.burgerBuilderReducer.totalPrice,
-    error : state.burgerBuilderReducer.error
+    error : state.burgerBuilderReducer.error,
+    isSignUp : state.authReducer.token
   }
 }
 
@@ -115,7 +123,8 @@ const mapDispatchToProps = dispatch =>{
   return{
     addIngredient : (ingredientName)=> dispatch(actionType.addIngredient(ingredientName)),
     removeIngredient : (ingredientName)=> dispatch(actionType.removeIngredient(ingredientName)),
-    loadIngredient : ()=> dispatch(actionType.loadIngredient())
+    loadIngredient : ()=> dispatch(actionType.loadIngredient()),
+    purchaseableHandler : (value)=>dispatch(actionType.purchaseableHandler(value))
   }
 }
 

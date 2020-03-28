@@ -12,6 +12,7 @@ class Checkout extends Component {
     
     checkoutContinued = ()=>{
         this.props.history.replace(this.props.match.path + '/contact-data')
+        
     }
     
     render(){

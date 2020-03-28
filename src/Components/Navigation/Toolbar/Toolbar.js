@@ -6,6 +6,8 @@ import Aux from '../../hoc/Auxiliary'
 import Backdrop from '../../Backdrop/Backdrop'
 import NavigationItems from '../Navigation Items/NavigationItems'
 import Hamburger from '../../UI/Hamburger/Hamburger'
+import {connect} from 'react-redux'
+
 
 class Toolbar extends Component{
     state ={
@@ -29,11 +31,21 @@ class Toolbar extends Component{
                 <header className={classes.Toolbar}>
                     <div className = {classes.Hamburger} style={{height : "100%"}} onClick={this.showSideDrawer} disabled><Hamburger/></div>
                     <Logo />
-                    <div className={classes.DesktopOnly}><NavigationItems/></div>
+                    <div className={classes.DesktopOnly}>
+                    <NavigationItems 
+                        isSignUp={this.props.token}
+                        LogOut={this.props.logOut}/></div>
                 </header>
             </Aux>
     )
     }
 }
 
-export default Toolbar;
+const mapStateToProps = state=>{
+    return{
+        token : state.authReducer.token
+    }
+}
+
+
+export default connect(mapStateToProps)(Toolbar);

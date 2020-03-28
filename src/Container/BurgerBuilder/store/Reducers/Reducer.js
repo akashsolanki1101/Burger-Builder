@@ -5,7 +5,8 @@ import * as actionType from '../Actions/Actions'
 const initialState = {
     ingredients : null,
     totalPrice : 2,
-    error : false
+    error : false,
+    purchaseable : false
 }
 
 const ingredientsPrice = {
@@ -56,6 +57,13 @@ const reducer = (state = initialState,action)=>{
             return {
                 ...state,
                 error : true
+            }
+        }
+
+        case(actionType.Purchaseable):{
+            return {
+                ...state ,
+                purchaseable : action.value
             }
         }
 

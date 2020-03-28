@@ -1,9 +1,9 @@
 .Block{
     position : absolute;
     top : 45%;
-    left : 31.5%;
+    left : 35%;
     z-index : 400;
-    width  : 37%;
+    width  : 30%;
     height  :220px;
     background-color: white;
     text-align: center;
@@ -20,4 +20,13 @@
     margin-top : 2px;
     text-align: center;
     color : #309A00;
+}
+
+@media(max-width:500px)
+{
+    .Block{
+        width : 200px;
+        top : 40%;
+        left : 29%
+    }
 }

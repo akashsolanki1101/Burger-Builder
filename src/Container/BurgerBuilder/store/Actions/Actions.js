@@ -1,8 +1,10 @@
 import axios from '../../../../axios-orders';
+
 export const Addingredient = "ADD_INGREDIENTS";
 export const Removeingredient = "REMOVE_INGREDIENTS";
 export const Loadingredient =  "LOAD_INGREDIENTS";
 export const FetchingIngredientserror = "FETCHING_INGREDIENTS_ERROR"
+export const Purchaseable = "PURCHASEABLE";
 
 export const addIngredient = (ingredientName)=>{
     return{
@@ -41,5 +43,12 @@ export const loadIngredient = ()=>{
       .catch(error => {
           dispatch(fetchIngredientsError())
         });
+    }
+}
+
+export const purchaseableHandler = (value)=>{
+    return{
+        type : Purchaseable,
+        value : value
     }
 }

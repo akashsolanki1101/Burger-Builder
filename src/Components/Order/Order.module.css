@@ -7,9 +7,22 @@
     margin :2px auto;
 }
 
+.Ingredients{
+    display : block;
+}
+
 .Ingredient{
     border : 1px solid #ccc;
     padding : 2px;
     margin : 5px;
     background-color: white;
+}
+
+@media(max-width : 610px)
+{
+    .Ingredient{
+        display : block;
+        border : none;
+        /* margin-left : 0px */
+    }
 }

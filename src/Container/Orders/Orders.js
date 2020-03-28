@@ -9,7 +9,7 @@ import * as actionTypes from './store/Actions/Actions'
 class Orders extends Component {
 
     componentDidMount(){
-        this.props.loadOrders();
+        this.props.loadOrders(this.props.token);
     }
 
     render(){
@@ -29,14 +29,15 @@ const mapStateToProps = state=> {
     return (
         {
             orders  : state.orderReducer.orders,
-            loading : state.orderReducer.loading
+            loading : state.orderReducer.loading,
+            token : state.authReducer.token
         }
     )
 }
 
 const mapDispatchToProps = dispatch =>{
     return {
-        loadOrders : ()=>dispatch(actionTypes.loadOrders())
+        loadOrders : (token)=>dispatch(actionTypes.loadOrders(token))
     }
 }
 

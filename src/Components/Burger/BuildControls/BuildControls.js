@@ -23,7 +23,11 @@ const buildControls = (props)=>{
                         addIngredient={()=>props.addIngredient(ctrl.type)}
                         removeIngredient={()=>props.removeIngredient(ctrl.type)}/>)
             }
-            <button className={classes.OrderButton} disabled={!props.purchaseAble} onClick={props.placeorder}>Order Now</button>
+            <button 
+                className={classes.OrderButton} 
+                disabled={!props.purchaseAble} 
+                onClick={props.placeorder}>
+                {props.isSignUp ? "ORDER NOW" : "SIGN UP TO ORDER" }</button>
         </div>
 )}
 

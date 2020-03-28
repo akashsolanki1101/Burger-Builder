@@ -19,10 +19,10 @@ const orderUploadFailure = ()=>{
     }
 }
 
-export const placeOrder = (order)=>{
+export const placeOrder = (order,token)=>{
     return dispatch=>{
         axios
-        .post("/orders.json", order)
+        .post("/orders.json?auth="+token, order)
         .then(response => {
             dispatch(orderUploadSuccess())
         })

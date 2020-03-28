@@ -10,6 +10,7 @@ import thunk from 'redux-thunk'
 import orderReducer from './Container/Orders/store/Reducers/Reducer'
 import burgerBuilderReducer from './Container/BurgerBuilder/store/Reducers/Reducer'
 import contactDataReducer from './Container/ContactData/store/Reducer/Reducer'
+import authReducer from './Container/Auth/store/Reducers/Reducer'
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -23,7 +24,8 @@ const logger = store=>next=>action=>{
 const rootReducer = combineReducers({
     orderReducer  : orderReducer,
     burgerBuilderReducer : burgerBuilderReducer,
-    contactDataReducer : contactDataReducer
+    contactDataReducer : contactDataReducer,
+    authReducer : authReducer
 })
 
 const store = createStore(rootReducer,composeEnhancer(applyMiddleware(logger,thunk)));
