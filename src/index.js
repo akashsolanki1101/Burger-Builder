@@ -12,14 +12,8 @@ import burgerBuilderReducer from './Container/BurgerBuilder/store/Reducers/Reduc
 import contactDataReducer from './Container/ContactData/store/Reducer/Reducer'
 import authReducer from './Container/Auth/store/Reducers/Reducer'
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer = process.env.NODE_ENV==="development" ?  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :null || compose;
 
-const logger = store=>next=>action=>{
-    console.log("[Middleware] dispatching action",action);
-    const result = next(action);
-    console.log("[Middleware] next state",store.getState());
-    return result;
-}
 
 const rootReducer = combineReducers({
     orderReducer  : orderReducer,
@@ -28,7 +22,7 @@ const rootReducer = combineReducers({
     authReducer : authReducer
 })
 
-const store = createStore(rootReducer,composeEnhancer(applyMiddleware(logger,thunk)));
+const store = createStore(rootReducer,composeEnhancer(applyMiddleware(thunk)));
 
 const app = (
     <Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>

@@ -30,7 +30,8 @@ class App extends Component{
                 <Switch>
                     <Route path="/checkout" component={Checkout}></Route>
                     <Route path="/orders" component={Orders}></Route>
-                    <Route path="/logout" component={LogOut}></Route> 
+                    <Route path="/logout" component={LogOut}></Route>
+                    <Route path="/auth" component={Auth}></Route>
                     <Route path="/" exact component={BurgerBuilder}></Route>
                     <Redirect to="/" />
                 </Switch>)
@@ -39,13 +40,7 @@ class App extends Component{
         return(
             <div className={classes.App}>
                 <Layout>
-                    <Switch>
-                        <Route path="/checkout" component={Checkout}></Route>
-                        <Route path="/orders" component={Orders}></Route>
-                        <Route path="/logout" component={LogOut}></Route> 
-                        <Route path="/auth" component={Auth}></Route>
-                        <Route path="/" exact component={BurgerBuilder}></Route>
-                    </Switch>
+                    {Routes}
                 </Layout>
             </div>
         )

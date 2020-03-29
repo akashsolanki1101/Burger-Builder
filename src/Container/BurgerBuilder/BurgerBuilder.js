@@ -83,6 +83,7 @@ class BurgerBuilder extends Component {
       burger = (
         
         <Aux>
+        <div className={classes.block}>
           <Burger ingredients={this.props.ingredients} />
           <BuildControls
             ingredients={this.props.ingredients}
@@ -93,7 +94,7 @@ class BurgerBuilder extends Component {
             placeorder={this.props.isSignUp ? this.placeOrder : this.redirectToAuth}
             isSignUp={this.props.isSignUp}
           />
-          
+          </div>
           <Modal show={this.state.placeOrder} cancel={this.cancelOrder}>
               {orderSummary}
           </Modal>

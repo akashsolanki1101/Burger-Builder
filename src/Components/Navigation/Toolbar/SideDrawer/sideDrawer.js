@@ -18,7 +18,7 @@ const sideDrawer = props => {
   return (
       <Aux>
         <div className={classees.join(" ")}>{props.children}
-          <NavigationItems isSignUp={props.isSignUp}/>
+           <NavigationItems isSignUp={props.isSignUp} hideSideDrawer={props.hideSideDrawer}/>
         </div>
       </Aux>
     );

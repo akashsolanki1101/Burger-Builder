@@ -25,16 +25,16 @@ class Toolbar extends Component{
     render(){
         return(
             <Aux>
-                <SideDrawer sideDrawer={this.state.sideDrawer} isSignUp={this.props.token}/>
+                <SideDrawer sideDrawer={this.state.sideDrawer} isSignUp={this.props.token} hideSideDrawer={this.hideSideDrawer}/>
                 <Backdrop cancel={this.hideSideDrawer}
                             show={this.state.sideDrawer}/>
                 <header className={classes.Toolbar}>
                     <div className = {classes.Hamburger} style={{height : "100%"}} onClick={this.showSideDrawer} disabled><Hamburger/></div>
                     <Logo />
                     <div className={classes.DesktopOnly}>
-                    <NavigationItems 
-                        isSignUp={this.props.token}  
-                    /></div>
+                        <NavigationItems 
+                            isSignUp={this.props.token}/>
+                    </div>
                 </header>
             </Aux>
     )

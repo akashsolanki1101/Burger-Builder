@@ -4,7 +4,7 @@ import classes from './Logo.module.css';
 
 const logo = ()=>(
     <div className={classes.Logo}>
-        <img src={image} alt="LOGO" style={{height:"4vh"}}/>
+        <img src={image} alt="LOGO" style={{height:"3.5vh"}}/>
     </div>
 )
 

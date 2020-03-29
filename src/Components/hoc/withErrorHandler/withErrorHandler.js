@@ -26,20 +26,19 @@ const withErrorHandler = (WrappedComponent,axios)=>{
         }
 
         componentWillUnmount(){
-            axios.interceptors.request.eject(this.reqinterceptors);
+            axios.interceptors.request.eject(this.reqInterceptors);
             axios.interceptors.response.eject(this.resInterceptors);
         }
 
         render(){
             return(
                 <Aux>
-                <Modal show={this.state.error} cancel={this.errorHandler}>
-                    {this.state.error ? this.state.error.message : null}
-                </Modal>
-                <WrappedComponent {...this.props}>
-                    
-                </WrappedComponent>
-            </Aux>
+                    <Modal show={this.state.error} cancel={this.errorHandler}>
+                        {this.state.error ? this.state.error.message : null}
+                    </Modal>
+                    <WrappedComponent {...this.props}>
+                    </WrappedComponent>
+                </Aux>
             )
         }
     } 

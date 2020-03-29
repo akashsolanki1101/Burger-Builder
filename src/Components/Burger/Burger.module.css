@@ -15,8 +15,15 @@
       font-size : 150%;
     }  
   }
-  
-  @media (max-width : 430px){
+
+@media(max-width : 500px){
+  .Burger{
+    margin-top : 5%
+  }
+}  
+
+
+@media (max-width : 430px){
     .Burger{
       height : 300px;
       width : 100%;
@@ -24,3 +31,10 @@
       /* padding : 5px; */
     }
   }
+
+@media(max-width : 361px)
+{
+  .Burger{
+    margin-top : 0px
+  }
+}

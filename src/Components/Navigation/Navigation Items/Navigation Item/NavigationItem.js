@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 const navigationItem = (props)=>{
     
     return (
-        <li className={classes.NavigationItem}>
+        <li className={classes.NavigationItem} onClick={props.hideSideDrawer}>
             <NavLink 
             exact = {props.exact}
             to={props.link}

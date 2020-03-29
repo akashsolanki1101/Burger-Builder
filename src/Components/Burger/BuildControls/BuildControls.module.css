@@ -18,7 +18,7 @@
     padding: 12px 30px;
     box-shadow: 2px 2px 2px #966909;
     /* width : 150px; */
-    margin: 8px auto;
+    margin: 6px auto;
 }
 
 .OrderButton:hover, .OrderButton:active {
@@ -50,13 +50,13 @@
     }
 }
 
-@media(max-width : 360px){
+@media(max-width : 500px){
     .BuildControls{
         margin-top: 60px;
     }
 }
 
-@media(max-width : 320px){
+@media(max-width : 361px){
     .BuildControls{
         margin-top: 0px;
     }

@@ -51,7 +51,7 @@ export const auth = (email,password,isSignUp)=>{
         password : password,
         returnSecureToken : true
     }
-    console.log(isSignUp);
+
     let base = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyASsI_PIT16KSCxzomP1WBfi7D8N7Vyb5I";
     if(!isSignUp)
     {
@@ -65,17 +65,15 @@ export const auth = (email,password,isSignUp)=>{
             localStorage.setItem('token',response.data.idToken)
             localStorage.setItem('expirationDate',expirationDate)
             localStorage.setItem('userId',response.data.localId)
-            console.log(response);
             dispatch(authSuccess(response.data.idToken,response.data.expiresIn,response.data.localId));
             dispatch(sessionTimeout(response.data.expiresIn))
         })
         .catch(error=>{
-            console.log(error)
+            console.log(error.response.data.errors);
             dispatch(authFail(error));
         })
     }
 }
-
 
 export const checkAuthStatus = ()=>{
     return dispatch =>{

@@ -116,11 +116,6 @@ class Auth extends Component {
             })
         }
 
-        let errorMessage = null;
-        if(this.props.error)
-        {
-            errorMessage = <p>{this.props.error.message}</p>
-        }
 
         let redirect = null
         if(this.props.token)
@@ -137,7 +132,6 @@ class Auth extends Component {
         return(
             <div className={classes.Auth}>
             {redirect}
-            {errorMessage}
             <form >
                 {formControls.map(element=>{
                     return <Input
